@@ -5,14 +5,56 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"lat"}),
+        @UniqueConstraint(columnNames = {"lng"}),
+        @UniqueConstraint(columnNames = {"zip"}),
+        @UniqueConstraint(columnNames = {"name"}),
+        @UniqueConstraint(columnNames = {"address"})
+}, name="tourist_points")
 public class TouristPoints {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(unique = true)
-    private UUID id_point;
+    @Column(unique = true, nullable = false)
+    private UUID id;
+
+    @Column(unique = true, nullable = false)
     private String name;
+
+    @Column(unique = true, nullable = false)
     private String address;
+
+    @Column(nullable = false)
     private String city;
+
+    @Column(nullable = false)
+    private String neighborhood;
+
+    @Column(nullable = false)
+    private String state;
+
+    @Column(nullable = false)
+    private String country;
+
+    @Column(nullable = false)
+    private String number;
+
+    @Column(unique = true, nullable = false)
+    private String zip;
+
+    @Column(unique = true, nullable = false)
+    private Float lat;
+
+    @Column(unique = true, nullable = false)
+    private Float lng;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public Float getLng() {
         return lng;
@@ -93,12 +135,4 @@ public class TouristPoints {
     public void setName(String name) {
         this.name = name;
     }
-
-    private String neighborhood;
-    private String state;
-    private String country;
-    private String number;
-    private String zip;
-    private Float lat;
-    private Float lng;
 }
